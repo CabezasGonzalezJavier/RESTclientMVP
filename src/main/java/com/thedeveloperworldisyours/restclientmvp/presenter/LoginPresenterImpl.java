@@ -1,5 +1,6 @@
 package com.thedeveloperworldisyours.restclientmvp.presenter;
 
+import android.content.ComponentName;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -23,9 +24,6 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
         this.loginView = loginView;
     }
 
-
-
-
     @Override
     public void executeAsync(String url, String type) {
         this.execute(url, type);
@@ -33,10 +31,17 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
     @Override
     protected LoginResponse doInBackground(String... params) {
 
-        final String url = params[0];
-        final String type = params[1];
+        final String username = params[0];
+        final String password = params[1];
 
-        return callClient(url, type);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(Constants.URL_LOGIN);
+        stringBuilder.append("?username=");
+        stringBuilder.append(username);
+        stringBuilder.append("&password=");
+        stringBuilder.append(password);
+
+        return callClient(stringBuilder.toString(), Constants.TYPE);
     }
 
     public LoginResponse callClient(final String url, final String type) {
@@ -93,7 +98,7 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
     protected void onPostExecute(LoginResponse response) {
         super.onPostExecute(response);
 
-        Log.v("onPostExecute", response.getCreatedAt().toString());
+//        Log.v("onPostExecute", response.getCreatedAt().toString());
 
         if (response.isInterneterror()) {
 
