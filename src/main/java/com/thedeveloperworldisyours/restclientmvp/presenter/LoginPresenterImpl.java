@@ -1,8 +1,6 @@
 package com.thedeveloperworldisyours.restclientmvp.presenter;
 
-import android.content.ComponentName;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import com.thedeveloperworldisyours.restclientmvp.model.LoginResponse;
 import com.thedeveloperworldisyours.restclientmvp.utils.Constants;
