@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">RESTclientMVP</string>
+    <string name="activity_main_username_tmp">Cabezas</string>
+    <string name="activity_main_password_tmp">123456</string>
+    <string name="activity_main_set_field">Set field</string>
+    <string name="activity_main_send">Send</string>
+    <string name="activity_main_register">Register</string>
+    <string name="activity_main_on_request_error">Request error</string>
+    <string name="activity_main_general_error">General error</string>
+    <string name="activity_main_no_internet">No internet</string>
 </resources>

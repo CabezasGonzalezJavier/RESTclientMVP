@@ -8,4 +8,5 @@ public class Constants {
     public static final String PARSE_CLIENT_KEY = "A6OPq01Ic9Tp1GipH3Ba7CvOLMjy7CneXkcZynln";
 
     public static final String URL_LOGIN = "https://api.parse.com/1/login";
+    public static final String TYPE = "GET";
 }
