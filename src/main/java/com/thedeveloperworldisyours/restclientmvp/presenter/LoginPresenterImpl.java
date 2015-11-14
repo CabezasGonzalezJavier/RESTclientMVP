@@ -17,9 +17,9 @@ import java.net.URL;
  */
 public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> implements LoginPresenter {
 
-    private LoginView loginView;
+    private LoginView mLoginView;
     public LoginPresenterImpl(LoginView loginView) {
-        this.loginView = loginView;
+        this.mLoginView = loginView;
     }
 
     @Override
@@ -57,10 +57,6 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
 
             connection.setRequestMethod(type);
 
-//            int responseCode = 0;
-//            responseCode = con.getResponseCode();
-
-
             BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
             String inputLine;
@@ -73,14 +69,8 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
             responseJson = response.toString();
 
 
-//            Log.v("Asyntask", String.valueOf(con.getResponseCode()));
-
-            //con.getResponseCode() //set statusCode to Response obj
-//            responseModel.setContent(connection.getContent()); // set the body to the T response
-//            responseModel.setHeaders(connection.getHeaderFields());
             responseModel.setCode(connection.getResponseCode());
-//            responseModel.setInfo(responseJson);
-//            Log.v("Client",con.getResponseCode());
+            responseModel.setInfo(responseJson);
             in.close();
 
         } catch (IOException e) {
@@ -100,13 +90,13 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
 
         if (response.isInterneterror()) {
 
-            loginView.onGeneralError();
+            mLoginView.onGeneralError();
 
         } else {
             if (response.checkStatusCode(response.getCode())) {
-                loginView.onRequestSuccess(response);
+                mLoginView.onRequestSuccess(response);
             } else {
-                loginView.onRequestError(response);
+                mLoginView.onRequestError(response);
             }
 
         }
