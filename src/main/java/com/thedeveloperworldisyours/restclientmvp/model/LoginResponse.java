@@ -1,18 +1,42 @@
 package com.thedeveloperworldisyours.restclientmvp.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by javiergonzalezcabezas on 9/11/15.
  */
-public class LoginResponse  implements Serializable {
+public class LoginResponse  implements Parcelable {
     private  String mCreatedAt;
     private  String mObjectId;
     private  String mSessionToken;
     private  String mUpdatedAt;
     private  String mUsername;
     private int mCode;
+    private String info;
     private boolean mInterneterror;
+    public LoginResponse() {}
+    protected LoginResponse(Parcel in) {
+        mCreatedAt = in.readString();
+        mObjectId = in.readString();
+        mSessionToken = in.readString();
+        mUpdatedAt = in.readString();
+        mUsername = in.readString();
+        mCode = in.readInt();
+        mInterneterror = in.readByte() != 0;
+    }
+
+    public static final Creator<LoginResponse> CREATOR = new Creator<LoginResponse>() {
+        @Override
+        public LoginResponse createFromParcel(Parcel in) {
+            return new LoginResponse(in);
+        }
+
+        @Override
+        public LoginResponse[] newArray(int size) {
+            return new LoginResponse[size];
+        }
+    };
 
     public boolean checkStatusCode(int status) {
 
@@ -30,6 +54,14 @@ public class LoginResponse  implements Serializable {
 
     public void setCode(int code) {
         this.mCode = code;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public boolean isInterneterror() {
@@ -89,5 +121,19 @@ public class LoginResponse  implements Serializable {
                 ", updatedAt='" + mUpdatedAt + '\'' +
                 ", username='" + mUsername + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(mCreatedAt);
+        dest.writeString(mObjectId);
+        dest.writeString(mSessionToken);
+        dest.writeString(mUpdatedAt);
+        dest.writeString(mUsername);
     }
 }

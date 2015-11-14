@@ -17,9 +17,9 @@ import java.net.URL;
  */
 public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> implements LoginPresenter {
 
-    private LoginView loginView;
+    private LoginView mLoginView;
     public LoginPresenterImpl(LoginView loginView) {
-        this.loginView = loginView;
+        this.mLoginView = loginView;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
 //            responseModel.setContent(connection.getContent()); // set the body to the T response
 //            responseModel.setHeaders(connection.getHeaderFields());
             responseModel.setCode(connection.getResponseCode());
-//            responseModel.setInfo(responseJson);
+            responseModel.setInfo(responseJson);
 //            Log.v("Client",con.getResponseCode());
             in.close();
 
@@ -100,13 +100,13 @@ public class LoginPresenterImpl extends AsyncTask<String, Void, LoginResponse> i
 
         if (response.isInterneterror()) {
 
-            loginView.onGeneralError();
+            mLoginView.onGeneralError();
 
         } else {
             if (response.checkStatusCode(response.getCode())) {
-                loginView.onRequestSuccess(response);
+                mLoginView.onRequestSuccess(response);
             } else {
-                loginView.onRequestError(response);
+                mLoginView.onRequestError(response);
             }
 
         }
